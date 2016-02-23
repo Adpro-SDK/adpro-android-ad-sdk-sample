@@ -36,6 +36,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     AdView adView;
 
     public void addView() {
+
+        if (adView != null && adView.getParent() != null && adView.getParent() instanceof ViewGroup) {
+            ((ViewGroup) (adView.getParent())).removeView(adView);
+            adView.destroy();
+            adView = null;
+        }
+
         AdRequest adRequest = new AdRequest.Builder()
                 .setGender(AdRequest.GENDER_MALE).setAddress("Tiananmen square in Beijing").setLongitude(116.46).setLatitude(39.92)
                 .setBirthday(new GregorianCalendar(2016, 1, 26).getTime())
@@ -74,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Log.e(TAG, "Banner onAdLoaded");
             }
         });
-        adView.setAdSize(new AdSize(-1, 50));
+        adView.setAdSize(new AdSize(-1, 40));
 //        adView.setAdSize(AdSize.BANNER);
         adView.loadAd(adRequest);
 
@@ -139,12 +146,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         interstitialAd.setAdListener(new InterstitialAd.AdListener() {
             @Override
             public void onAdClosed() {
+                if (interstitialAd != null) {
+                    interstitialAd.destroy();
+                    interstitialAd = null;
+                }
                 mToast("Interstitial(AutoShow)  Close");
                 Log.e(TAG, "Interstitial(AutoShow)  Close");
             }
 
             @Override
             public void onAdFailedToLoad(int code, String error) {
+                if (interstitialAd != null) {
+                    interstitialAd.destroy();
+                    interstitialAd = null;
+                }
                 mToast("Interstitial(AutoShow) Loaded Failed Info:" + code + " error:" + error);
                 Log.e(TAG, "Interstitial(AutoShow) Loaded Failed Info:" + code + " error:" + error);
             }

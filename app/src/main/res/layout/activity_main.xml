@@ -11,26 +11,21 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.pro.demo.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
-
     <Button
         android:id="@+id/popup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Popup" />
+        android:text="显示Popup" />
 
     <Button
         android:id="@+id/popup_auto_show"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Popup(AutoShow)" />
+        android:text="显示Popup(自动展示)" />
 
     <Button
         android:id="@+id/banner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="AddView" />
+        android:text="显示Banner" />
 </LinearLayout>
