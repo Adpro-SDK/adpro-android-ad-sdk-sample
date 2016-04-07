@@ -1,5 +1,3 @@
-# adpro-android-ad-sdk-sample
-
 # AdProSDK（Android）开发者手册
 
 
@@ -281,6 +279,29 @@ interstitialAd = new InterstitialAd(this, getString(R.string.app_key), getString
         }
     }
    ```
+ 
+## DEBUG
+
+添加代码，打开Debug Log
+
+```
+AdRequest.setDebug(true);
+```
+
+
+## 错误码
+
+错误码|描述
+-----|----
+0|未知错误
+1|配置错误
+2|网络错误
+3|内部错误
+4|服务器错误
+5|参数错误
+6|没有合适广告
+7|插播广告已经展示过
+8|插播广告没有准备好
 
 
 ## 问题及处理方法
@@ -309,11 +330,11 @@ SDK 使用的 `UTF-8` 编码，请尽量使用`UTF-8`编码。
   请在proguard.cfg中加入以下代码:
   
 ```
--dontwarn a.a.**
+-dontwarn dexguard.util.**
 -dontwarn cn.pro.sdk.**
 -dontwarn assets.**
--dontwarn com.android.volley.**
--keep class a.a.** { *; }
+-dontwarn com.g.v.**
+-keep class dexguard.util.** { *; }
 -keep class cn.pro.sdk.** { *; }
--keep class com.android.volley.** { *; }
+-keep class com.g.v.** { *; }
 ```
