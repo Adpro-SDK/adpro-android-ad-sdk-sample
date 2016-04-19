@@ -31,6 +31,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.popup).setOnClickListener(this);
         findViewById(R.id.popup_auto_show).setOnClickListener(this);
         findViewById(R.id.banner).setOnClickListener(this);
+
+        AdRequest.setDebug(true);
     }
 
     AdView adView;
@@ -48,14 +50,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .setBirthday(new GregorianCalendar(2016, 1, 26).getTime())
                 .build();
 
-        adView = new AdView(this, getString(R.string.app_key), getString(R.string.app_id), "377082c1637093841d99");
+        adView = new AdView(this, "b8ad2df6", "4c9fa4d86247ea510651", "377082c1637093841d99");
         adView.setAdListener(new AdView.AdListener() {
 
             @Override
             public void onAdFailedToLoad(int code, String error) {
                 super.onAdFailedToLoad(code, error);
                 mToast("Banner FailedToLoad Info:" + code + " error:" + error);
-                Log.e(TAG, "Banner FailedToLoad Info:" + code + " error:" + error);
+//                Log.e(TAG, "App Banner FailedToLoad Info:" + code + " error:" + error);
                 if (adView != null && adView.getParent() != null && adView.getParent() instanceof ViewGroup)
                     ((ViewGroup) adView.getParent()).removeView(adView);
             }
@@ -64,25 +66,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onWillLeaveApplication() {
                 super.onWillLeaveApplication();
                 mToast("Banner Left Application");
-                Log.e(TAG, "Banner Left Application");
+//                Log.e(TAG, "App Banner Left Application");
             }
 
             @Override
             public void onWillPresentFullScreen() {
                 super.onWillPresentFullScreen();
                 mToast("Banner onWillPresentFullScreen");
-                Log.e(TAG, "Banner onWillPresentFullScreen");
+//                Log.e(TAG, "App Banner onWillPresentFullScreen");
             }
 
             @Override
             public void onAdLoaded() {
                 super.onAdLoaded();
                 mToast("Banner onAdLoaded");
-                Log.e(TAG, "Banner onAdLoaded");
+//                Log.e(TAG, "App Banner onAdLoaded");
             }
         });
         adView.setAdSize(new AdSize(-1, 40));
 //        adView.setAdSize(AdSize.BANNER);
+        adView.destroy();
         adView.loadAd(adRequest);
 
         //插入到布局
@@ -103,19 +106,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onAdClosed() {
                 mToast("Interstitial  Close");
-                Log.e(TAG, "Interstitial  Close");
+//                Log.e(TAG, "App Interstitial  Close");
             }
 
             @Override
             public void onAdFailedToLoad(int code, String error) {
                 mToast("Interstitial Loaded Failed Info:" + code + " error:" + error);
-                Log.e(TAG, "Interstitial Loaded Failed Info:" + code + " error:" + error);
+//                Log.e(TAG, "App Interstitial Loaded Failed Info:" + code + " error:" + error);
             }
 
             @Override
             public void onAdLoaded() {
                 mToast("Interstitial Loaded");
-                Log.e(TAG, "Interstitial Loaded");
+//                Log.e(TAG, "App Interstitial Loaded");
                 if (interstitialAd != null) //显示插屏广告
                     interstitialAd.show();
             }
@@ -123,13 +126,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onWillLeaveApplication() { //将要离开应用
                 mToast("Interstitial onWillLeaveApplication");
-                Log.e(TAG, "Interstitial onWillLeaveApplication");
+//                Log.e(TAG, "App Interstitial onWillLeaveApplication");
             }
 
             @Override
             public void onWillPresentFullScreen() { //将要展示全屏广告
                 mToast("Interstitial onWillPresentFullScreen");
-                Log.e(TAG, "Interstitial onWillPresentFullScreen");
+//                Log.e(TAG, "App Interstitial onWillPresentFullScreen");
             }
         });
         interstitialAd.loadAd(adRequest);
@@ -151,7 +154,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     interstitialAd = null;
                 }
                 mToast("Interstitial(AutoShow)  Close");
-                Log.e(TAG, "Interstitial(AutoShow)  Close");
+//                Log.e(TAG, "App Interstitial(AutoShow)  Close");
             }
 
             @Override
@@ -161,25 +164,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     interstitialAd = null;
                 }
                 mToast("Interstitial(AutoShow) Loaded Failed Info:" + code + " error:" + error);
-                Log.e(TAG, "Interstitial(AutoShow) Loaded Failed Info:" + code + " error:" + error);
+//                Log.e(TAG, "App Interstitial(AutoShow) Loaded Failed Info:" + code + " error:" + error);
             }
 
             @Override
             public void onWillPresentFullScreen() {
                 mToast("Interstitial(AutoShow)  onWillPresentFullScreen");
-                Log.e(TAG, "Interstitial(AutoShow)  onWillPresentFullScreen");
+//                Log.e(TAG, "App Interstitial(AutoShow)  onWillPresentFullScreen");
             }
 
             @Override
             public void onAdLoaded() {
                 mToast("Interstitial(AutoShow) Loaded");
-                Log.e(TAG, "Interstitial(AutoShow) Loaded");
+//                Log.e(TAG, "App Interstitial(AutoShow) Loaded");
             }
 
             @Override
             public void onWillLeaveApplication() {
                 mToast("Interstitial(AutoShow) onWillLeaveApplication");
-                Log.e(TAG, "Interstitial(AutoShow) onWillLeaveApplication");
+//                Log.e(TAG, "App Interstitial(AutoShow) onWillLeaveApplication");
             }
         });
         interstitialAd.loadAdAutoShow(adRequest);
